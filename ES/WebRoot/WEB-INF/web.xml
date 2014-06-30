@@ -28,7 +28,7 @@
   <context-param>
 	<param-name>contextConfigLocation</param-name>
 	<param-value>classpath:/META-INF/jdbc-context.xml</param-value>
-	<description>加载数据库连接的环境</description>
+	<!-- 加载数据库连接的环境 -->
   </context-param>  
 
   <servlet>
@@ -37,9 +37,9 @@
   	<init-param>
   		<param-name>contextConfigLocation</param-name>
   		<param-value>classpath:/META-INF/springMvc3-servlet.xml</param-value>
-  		<description>加载spring mvc的环境</description>
+  		<!-- 加载spring mvc的环境 -->
   	</init-param>
-  	<description>用来定义参数，可有多个init-param。在servlet类中通过getInitParamenter(String name)方法访问初始化参数</description>
+  	<!--用来定义参数，可有多个init-param。在servlet类中通过getInitParamenter(String name)方法访问初始化参数 -->
   	<load-on-startup>1</load-on-startup>
   </servlet>
   
@@ -53,7 +53,7 @@
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
   
-    	<!-- 登陆验证 开始,从 shrine_oa 项目copy而来，学习filter 2013.7.12-->
+    	
 
 	<filter>
 		<filter-name>frameworkFilter</filter-name>
