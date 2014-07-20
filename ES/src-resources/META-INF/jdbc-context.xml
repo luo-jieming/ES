@@ -42,13 +42,26 @@
 <!--     	<property name="maxStatements" value="20"></property>   jdbc的标准参数  用以控制数据源内加载的PreparedStatement数量，但由于预缓存的Statement属 于单个Connection而不是整个连接 -->
 <!--     </bean>-->
      
-     
-     
-     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+     	<property name="dataSource" ref="dataSource" />  
+     	<property name="mapperLocations" value="classpath:com/es/dao/mappers/*.xml" />
+     	<property name="typeAliasesPackage" value="com.es.po" />  
+	 </bean>
+	 
+     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+       <property name="basePackage" value="com.tiantian.mybatis.mapper" />
+       <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+     </bean>
+    
+    
+    
+    
+ <!--     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
      	<property name="dataSource" ref="dataSource"></property>
      </bean>
      
-     <!-- 声明式事务管理 -->
+     
+     声明式事务管理
      <aop:config>
      	<aop:advisor pointcut="execution(* com.aokunsang.service.impl.*ServiceImpl.*(..))" advice-ref="myAdvice"/>
      </aop:config>
@@ -60,9 +73,9 @@
      	</tx:attributes>
      </tx:advice>
      
-     <!-- 自动扫描组件，需要把controller去掉，否则影响事务管理 -->
+     自动扫描组件，需要把controller去掉，否则影响事务管理
      <context:component-scan base-package="com.aokunsang">
      	<context:exclude-filter type="regex" expression="com.aokunsang.web.*"/>
-     </context:component-scan>
+     </context:component-scan> -->
      
 </beans>

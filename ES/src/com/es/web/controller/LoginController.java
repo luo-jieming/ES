@@ -33,14 +33,14 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String logon(String userName,String passWord){
-		User user = null;
+		boolean relust = false;
 		logger.info("用户登录验证");
 		try {
-			user = loginService.getUser(userName, passWord);
+			relust = loginService.userLogin(userName, passWord);
 		} catch (RuntimeException e) {
 			logger.error("用户登录验证失败!" + e);
 		}
-		if(user!=null){
+		if(relust==true){
 			return "MyHome";
 		}else{
 			return "manage/login_system";
@@ -51,7 +51,7 @@ public class LoginController extends BaseController{
 	@RequestMapping(value="/register")
 	public String register(User user){
 		logger.info("用户注册");
-//		loginService.addUser(user);
+		loginService.userRegiste(user);
 		return "manage/register";
 	}
 
